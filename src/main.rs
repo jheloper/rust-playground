@@ -28,4 +28,16 @@ fn main() {
     // 따라서 변수 타입을 선언
     let guess: u32 = "42".parse().expect("Not a number!");
     println!("guess is: {}", guess);
+
+    let integer: i32 = 15000;
+    println!("integer is: {}", integer);
+
+    let float: f64 = 132.414;
+    println!("float is: {}", float);
+
+    let boolean: bool = false;
+    println!("boolean is: {}", boolean);
+
+    let character: char = 'A';
+    println!("character is: {}", character);
 }
