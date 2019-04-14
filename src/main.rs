@@ -23,4 +23,7 @@ fn main() {
     let space = "    ";
     let space = space.len();
     println!("space length is: {}", space);
+
+    // 변수 타입을 선언하지 않을 경우 아래 코드에서 에러 발생
+    let guess = "42".parse().expect("Not a number!");
 }
