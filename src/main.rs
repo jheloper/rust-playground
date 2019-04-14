@@ -25,5 +25,7 @@ fn main() {
     println!("space length is: {}", space);
 
     // 변수 타입을 선언하지 않을 경우 아래 코드에서 에러 발생
-    let guess = "42".parse().expect("Not a number!");
+    // 따라서 변수 타입을 선언
+    let guess: u32 = "42".parse().expect("Not a number!");
+    println!("guess is: {}", guess);
 }
