@@ -5,4 +5,7 @@ fn main() {
 
     x = 6;
     println!("The value of x is: {}", x);
+
+    const MAX_POINTS: u32 = 100_000;
+    println!("MAX_POINTS is: {}", MAX_POINTS);
 }
