@@ -19,7 +19,8 @@ fn main() {
 
     // 가변성 변수와 섀도잉의 차이. 가변성 변수를 사용하면 기존 타입과 다른 타입의 값이 들어올 경우
     // 에러가 발생한다.
-    let mut space = "    ";
-    space = space.len();
+    // 섀도잉을 사용하면 타입이 다른 값이라도 할당할 수 있다.
+    let space = "    ";
+    let space = space.len();
     println!("space length is: {}", space);
 }
