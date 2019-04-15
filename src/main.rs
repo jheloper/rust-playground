@@ -40,4 +40,8 @@ fn main() {
 
     let character: char = 'A';
     println!("character is: {}", character);
+
+    let tup: (i32, f64, u8) = (500, 6.4, 1);
+    let (tup_x, tup_y, tup_z) = tup;
+    println!("The value of tup_x is: {}, tup_y is: {}, tup_z is: {}", tup_x, tup_y, tup_z);
 }
