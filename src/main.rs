@@ -44,4 +44,5 @@ fn main() {
     let tup: (i32, f64, u8) = (500, 6.4, 1);
     let (tup_x, tup_y, tup_z) = tup;
     println!("The value of tup_x is: {}, tup_y is: {}, tup_z is: {}", tup_x, tup_y, tup_z);
+    println!("The value of tup.0 is: {}, tup.1 is: {}, tup.2 is: {}", tup.0, tup.1, tup.2);
 }
