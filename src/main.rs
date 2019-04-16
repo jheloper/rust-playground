@@ -50,4 +50,10 @@ fn main() {
     let first = array[0];
     let second = array[1];
     println!("first is: {}, second is: {}", first, second);
+
+    another_function();
+}
+
+fn another_function() {
+    println!("This is another function!");
 }
