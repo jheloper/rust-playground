@@ -51,9 +51,9 @@ fn main() {
     let second = array[1];
     println!("first is: {}, second is: {}", first, second);
 
-    another_function();
+    another_function(10, 15);
 }
 
-fn another_function() {
-    println!("This is another function!");
+fn another_function(x: i32, y: i32) {
+    println!("This is another function! argument x is: {}, y is: {}", x, y);
 }
