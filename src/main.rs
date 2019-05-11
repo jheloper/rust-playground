@@ -52,8 +52,20 @@ fn main() {
     println!("first is: {}, second is: {}", first, second);
 
     another_function(10, 15);
+    block_expression();
 }
 
 fn another_function(x: i32, y: i32) {
     println!("This is another function! argument x is: {}, y is: {}", x, y);
+}
+
+fn block_expression() {
+    let x = 10;
+
+    let y = {
+        let x = 5;
+        x + 20
+    };
+
+    println!("The value of y is: {}", y);
 }
