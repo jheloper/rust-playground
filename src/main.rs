@@ -56,6 +56,14 @@ fn main() {
 
     let function_result = return_ten();
     println!("function result is: {}", function_result);
+
+    let if_number = 10;
+
+    if if_number < 10 {
+        println!("less than 10.");
+    } else {
+        println!("equal or greater than 10.");
+    }
 }
 
 fn another_function(x: i32, y: i32) {
