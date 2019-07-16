@@ -57,10 +57,12 @@ fn main() {
     let function_result = return_ten();
     println!("function result is: {}", function_result);
 
-    let if_number = 10;
+    let if_number = 5;
 
-    if if_number < 10 {
-        println!("less than 10.");
+    if if_number < 1 {
+        println!("less than 1.");
+    } else if if_number < 10 {
+        println!("between 1 and 9.");
     } else {
         println!("equal or greater than 10.");
     }
