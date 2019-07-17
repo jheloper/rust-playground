@@ -66,6 +66,17 @@ fn main() {
     } else {
         println!("equal or greater than 10.");
     }
+
+    // 아래와 같이 표현식의 결과값을 변수에 대입할 수 있다.
+    // 다만 반환하는 결과값의 타입이 다르면 컴파일 오류 발생. 
+    let condition = true;
+    let expression_number = if condition {
+        7
+    } else {
+        // "twelve"
+        12
+    };
+    println!("expression number is: {}", expression_number);
 }
 
 fn another_function(x: i32, y: i32) {
