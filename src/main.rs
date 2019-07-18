@@ -77,6 +77,16 @@ fn main() {
         12
     };
     println!("expression number is: {}", expression_number);
+
+    let mut loop_count = 0;
+    loop {
+        loop_count += 1;
+        println!("loop count is: {}", loop_count);
+
+        if loop_count == 5 {
+            break;
+        }
+    }
 }
 
 fn another_function(x: i32, y: i32) {
