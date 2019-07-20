@@ -94,6 +94,12 @@ fn main() {
         println!("while count is: {}", while_count);
         while_count -= 1;
     }
+
+    let for_example_array = [10, 20, 30, 40, 50];
+
+    for element in for_example_array.iter() {
+        println!("for loop example array element is: {}", element);
+    }
 }
 
 fn another_function(x: i32, y: i32) {
