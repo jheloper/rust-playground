@@ -87,6 +87,13 @@ fn main() {
             break;
         }
     }
+
+    let mut while_count = 3;
+
+    while while_count != 0 {
+        println!("while count is: {}", while_count);
+        while_count -= 1;
+    }
 }
 
 fn another_function(x: i32, y: i32) {
