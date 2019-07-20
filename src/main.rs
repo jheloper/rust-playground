@@ -100,6 +100,14 @@ fn main() {
     for element in for_example_array.iter() {
         println!("for loop example array element is: {}", element);
     }
+
+    for index in 0..4 {
+        println!("for loop index is: {}", index);
+    }
+
+    for index in (0..4).rev() {
+        println!("for loop index is: {}", index);
+    }
 }
 
 fn another_function(x: i32, y: i32) {
