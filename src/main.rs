@@ -155,4 +155,22 @@ fn test_ownership() {
     let s3 = String::from("hello");
     let s4 = s3.clone();
     println!("This value of s3 is: {}, s4 is: {}", s3, s4);
+
+    // 아래의 경우 복사가 발생하기 때문에 함수 인자로 넘긴 후에도 사용 가능.
+    let z = 5;
+    makes_copy(z);
+    println!("This value of z is: {}", z);
+    
+    // 아래의 경우 이동이 발생하기 때문에 함수 인자로 넘긴 후에는 사용 불가능.
+    let s5 = String::from("hello");
+    takes_ownership(s5);
+    // println!("This value of s5 is: {}", s5);
+}
+
+fn takes_ownership(some_string: String) {
+    println!("{}", some_string);
+}
+
+fn makes_copy(some_integer: i32) {
+    println!("{}", some_integer);
 }
