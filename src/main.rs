@@ -140,14 +140,19 @@ fn return_ten() -> i32 {
 
 fn test_ownership() {
 
-    // 아래의 경우 리터럴의 깊은 복사본이 만들어지기 때문에 정상적으로 출력 가능
+    // 아래의 경우 리터럴의 깊은 복사본이 만들어지기 때문에 정상적으로 출력 가능.
     let x = 5;
     let y = x;
     println!("This value of x is: {}, y is: {}", x, y);
 
-    // 아래의 경우 이동(move)이 발생하기 때문에 s1은 더 이상 유효하지 않음
+    // 아래의 경우 이동(move)이 발생하기 때문에 s1은 더 이상 유효하지 않음.
     let s1 = String::from("hello");
     let s2 = s1;
     //println!("This value of s1 is: {}", s1);
     println!("This value of s2 is: {}", s2);
+
+    // 아래의 경우 clone 메서드를 이용해서 명시적으로 깊은 복사본을 만들 수 있음.
+    let s3 = String::from("hello");
+    let s4 = s3.clone();
+    println!("This value of s3 is: {}, s4 is: {}", s3, s4);
 }
