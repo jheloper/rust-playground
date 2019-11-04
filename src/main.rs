@@ -115,6 +115,8 @@ fn main() {
     let mut example_string = String::from("hello");
     example_string.push_str(", world!");
     println!("example String value is: {}", example_string);
+
+    test_ownership();
 }
 
 fn another_function(x: i32, y: i32) {
@@ -134,4 +136,18 @@ fn block_expression() {
 
 fn return_ten() -> i32 {
     10
+}
+
+fn test_ownership() {
+
+    // 아래의 경우 리터럴의 깊은 복사본이 만들어지기 때문에 정상적으로 출력 가능
+    let x = 5;
+    let y = x;
+    println!("This value of x is: {}, y is: {}", x, y);
+
+    // 아래의 경우 이동(move)이 발생하기 때문에 s1은 더 이상 유효하지 않음
+    let s1 = String::from("hello");
+    let s2 = s1;
+    //println!("This value of s1 is: {}", s1);
+    println!("This value of s2 is: {}", s2);
 }
