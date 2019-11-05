@@ -165,6 +165,16 @@ fn test_ownership() {
     let s5 = String::from("hello");
     takes_ownership(s5);
     // println!("This value of s5 is: {}", s5);
+
+    // 아래의 경우 s6에 소유권이 이동됐으므로 사용 가능.
+    let s6 = gives_ownership();
+    println!("This value of s6 is: {}", s6);
+
+    // 아래의 경우 s7에서 s8으로 소유권이 이동됐으므로 s7은 무효.
+    let s7 = String::from("hello");
+    let s8 = takes_and_gives_back(s7);
+    // println!("This value of s7 is: {}", s7);
+    println!("This value of s8 is: {}", s8);
 }
 
 fn takes_ownership(some_string: String) {
@@ -173,4 +183,13 @@ fn takes_ownership(some_string: String) {
 
 fn makes_copy(some_integer: i32) {
     println!("{}", some_integer);
+}
+
+fn gives_ownership() -> String {
+    let some_string = String::from("hello");
+    some_string
+}
+
+fn takes_and_gives_back(a_string: String) -> String {
+    a_string
 }
