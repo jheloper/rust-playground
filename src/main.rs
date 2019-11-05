@@ -1,5 +1,4 @@
 fn main() {
-
     // mutable variable
     let mut x = 5;
     println!("The value of x is: {}", x);
@@ -43,8 +42,14 @@ fn main() {
 
     let tup: (i32, f64, u8) = (500, 6.4, 1);
     let (tup_x, tup_y, tup_z) = tup;
-    println!("The value of tup_x is: {}, tup_y is: {}, tup_z is: {}", tup_x, tup_y, tup_z);
-    println!("The value of tup.0 is: {}, tup.1 is: {}, tup.2 is: {}", tup.0, tup.1, tup.2);
+    println!(
+        "The value of tup_x is: {}, tup_y is: {}, tup_z is: {}",
+        tup_x, tup_y, tup_z
+    );
+    println!(
+        "The value of tup.0 is: {}, tup.1 is: {}, tup.2 is: {}",
+        tup.0, tup.1, tup.2
+    );
 
     let array = [1, 2, 3, 4, 5];
     let first = array[0];
@@ -68,7 +73,7 @@ fn main() {
     }
 
     // 아래와 같이 표현식의 결과값을 변수에 대입할 수 있다.
-    // 다만 반환하는 결과값의 타입이 다르면 컴파일 오류 발생. 
+    // 다만 반환하는 결과값의 타입이 다르면 컴파일 오류 발생.
     let condition = true;
     let expression_number = if condition {
         7
@@ -116,11 +121,16 @@ fn main() {
     example_string.push_str(", world!");
     println!("example String value is: {}", example_string);
 
-    test_ownership();
+    example_ownership();
+
+    example_reference();
 }
 
 fn another_function(x: i32, y: i32) {
-    println!("This is another function! argument x is: {}, y is: {}", x, y);
+    println!(
+        "This is another function! argument x is: {}, y is: {}",
+        x, y
+    );
 }
 
 fn block_expression() {
@@ -138,7 +148,8 @@ fn return_ten() -> i32 {
     10
 }
 
-fn test_ownership() {
+fn example_ownership() {
+    // 소유권 예제 코드.
 
     // 아래의 경우 리터럴의 깊은 복사본이 만들어지기 때문에 정상적으로 출력 가능.
     let x = 5;
@@ -160,7 +171,6 @@ fn test_ownership() {
     let z = 5;
     makes_copy(z);
     println!("This value of z is: {}", z);
-    
     // 아래의 경우 이동이 발생하기 때문에 함수 인자로 넘긴 후에는 사용 불가능.
     let s5 = String::from("hello");
     takes_ownership(s5);
@@ -192,4 +202,19 @@ fn gives_ownership() -> String {
 
 fn takes_and_gives_back(a_string: String) -> String {
     a_string
+}
+
+fn example_reference() {
+    // 참조자 예제 코드.
+    let s1 = String::from("hello");
+
+    // &s1를 넘겼으므로 소유권이 이동하지 않고 값을 참조할 수 있음.
+    let len = calculate_length(&s1);
+
+    println!("The length of '{}' is {}.", s1, len);
+}
+
+fn calculate_length(s: &String) -> usize {
+    // 인자로 &String을 선언하며 스트링 참조자를 받으므로 s는 소유권을 가지지 않음. 이것을 '빌림'이라고 표현.
+    s.len()
 }
