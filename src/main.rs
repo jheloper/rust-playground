@@ -206,15 +206,39 @@ fn takes_and_gives_back(a_string: String) -> String {
 
 fn example_reference() {
     // 참조자 예제 코드.
-    let s1 = String::from("hello");
 
+    let s1 = String::from("hello");
     // &s1를 넘겼으므로 소유권이 이동하지 않고 값을 참조할 수 있음.
     let len = calculate_length(&s1);
-
     println!("The length of '{}' is {}.", s1, len);
+
+    let s2 = String::from("hello");
+    change(&s2);
+    println!("The s2 value is '{}'", s2);
+
+    // 아래는 가변 참조자.
+    let mut s3 = String::from("hello");
+    change_mutable(&mut s3);
+    println!("The s3 value is '{}'", s3);
+
+    // 가변 참조자의 빌림은 하나만 허용된다.
+    let mut s4 = String::from("hello");
+    let r1 = &mut s4;
+    // let r2 = &mut s4;
+    println!("The r1 value is '{}'", r1);
+    // println!("The r2 value is '{}'", r2);
 }
 
 fn calculate_length(s: &String) -> usize {
     // 인자로 &String을 선언하며 스트링 참조자를 받으므로 s는 소유권을 가지지 않음. 이것을 '빌림'이라고 표현.
     s.len()
+}
+
+fn change(some_string: &String) {
+    // 아래처럼 참조자의 값을 변경할 수 없다.
+    // some_string.push_str(", world!");
+}
+
+fn change_mutable(some_string: &mut String) {
+    some_string.push_str(", world!");
 }
