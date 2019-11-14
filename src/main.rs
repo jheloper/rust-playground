@@ -237,7 +237,7 @@ fn example_reference() {
     let r4 = &mut s5;
     println!("The r4 value is '{}'", r4);
 
-    // 아래와 같이 불변 참조자를 가지고 있는 경우 새로 가변 참조자를 가질 수 없다.
+    // 아래와 같이 불변 참조자를 가지고 있는 경우 새로운 가변 참조자를 가질 수 없다.
     let mut s6 = String::from("hello");
     let r5 = &s6;
     let r6 = &s6;
@@ -245,6 +245,10 @@ fn example_reference() {
     println!("The r5 value is '{}'", r5);
     println!("The r6 value is '{}'", r6);
     // println!("The r7 value is '{}'", r7);
+
+    // 댕글링 참조자 예제.
+    // let reference_to_nothing = dangle();
+    let reference_to_nothing = no_dangle();
 }
 
 fn calculate_length(s: &String) -> usize {
@@ -259,4 +263,15 @@ fn change(some_string: &String) {
 
 fn change_mutable(some_string: &mut String) {
     some_string.push_str(", world!");
+}
+
+// 아래 함수는 댕글링 참조자를 만들기 때문에 컴파일 오류가 발생한다.
+// fn dangle() -> &String {
+//     let s = String::from("hello");
+//     &s
+// }
+
+fn no_dangle() -> String {
+    let s = String::from("hello");
+    s
 }
