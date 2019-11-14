@@ -221,12 +221,30 @@ fn example_reference() {
     change_mutable(&mut s3);
     println!("The s3 value is '{}'", s3);
 
-    // 가변 참조자의 빌림은 하나만 허용된다.
+    // 가변 참조자의 빌림은 특정 스코프 내에서 하나만 허용된다.
     let mut s4 = String::from("hello");
     let r1 = &mut s4;
     // let r2 = &mut s4;
     println!("The r1 value is '{}'", r1);
     // println!("The r2 value is '{}'", r2);
+
+    // 아래와 같이 가변 참조자를 다른 스코프 내에서 빌리는 것은 가능하다.
+    let mut s5 = String::from("hello");
+    {
+        let r3 = &mut s5;
+        println!("The r3 value is '{}'", r3);
+    }
+    let r4 = &mut s5;
+    println!("The r4 value is '{}'", r4);
+
+    // 아래와 같이 불변 참조자를 가지고 있는 경우 새로 가변 참조자를 가질 수 없다.
+    let mut s6 = String::from("hello");
+    let r5 = &s6;
+    let r6 = &s6;
+    // let r7 = &mut s6;
+    println!("The r5 value is '{}'", r5);
+    println!("The r6 value is '{}'", r6);
+    // println!("The r7 value is '{}'", r7);
 }
 
 fn calculate_length(s: &String) -> usize {
