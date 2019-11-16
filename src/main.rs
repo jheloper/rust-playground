@@ -124,6 +124,8 @@ fn main() {
     example_ownership();
 
     example_reference();
+
+    example_slices();
 }
 
 fn another_function(x: i32, y: i32) {
@@ -274,4 +276,24 @@ fn change_mutable(some_string: &mut String) {
 fn no_dangle() -> String {
     let s = String::from("hello");
     s
+}
+
+fn example_slices() {
+    let mut s = String::from("hello world");
+    let word = first_word(&s);
+    println!("word index is {}", word);
+
+    s.clear();
+}
+
+fn first_word(s: &String) -> usize {
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return i;
+        }
+    }
+
+    s.len()
 }
