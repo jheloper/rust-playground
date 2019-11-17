@@ -279,14 +279,21 @@ fn no_dangle() -> String {
 }
 
 fn example_slices() {
-    let mut s = String::from("hello world");
-    let word = first_word(&s);
-    println!("word index is {}", word);
+    let mut s1 = String::from("hello world");
+    let word_index = first_word(&s1);
+    println!("word index is {}", word_index);
 
-    s.clear();
+    s1.clear();
+
+    let mut s2 = String::from("hello world");
+    let first_word = first_word_slices(&s2);
+    println!("first word is {}", first_word);
+
+    s2.clear();
 }
 
 fn first_word(s: &String) -> usize {
+
     let bytes = s.as_bytes();
 
     for (i, &item) in bytes.iter().enumerate() {
@@ -296,4 +303,17 @@ fn first_word(s: &String) -> usize {
     }
 
     s.len()
+}
+
+fn first_word_slices(s: &String) -> &str {
+
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+
+    &s[..]
 }
