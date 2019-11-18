@@ -285,11 +285,21 @@ fn example_slices() {
 
     s1.clear();
 
+    // 슬라이스를 사용한 예제 코드
     let mut s2 = String::from("hello world");
-    let first_word = first_word_slices(&s2);
-    println!("first word is {}", first_word);
+    let hello = &s2[0..5];
+    let world = &s2[6..11];
+    println!("first word is {}", hello);
+    println!("second word is {}", world);
 
     s2.clear();
+
+    // 문자열에서 첫번째 단어의 슬라이스를 반환하는 함수
+    let mut s3 = String::from("hello world");
+    let first_word = first_word_slices(&s3);
+    println!("first word is {}", first_word);
+
+    s3.clear();
 }
 
 fn first_word(s: &String) -> usize {
