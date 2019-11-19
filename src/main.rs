@@ -294,10 +294,14 @@ fn example_slices() {
 
     s2.clear();
 
-    // 문자열에서 첫번째 단어의 슬라이스를 반환하는 함수
+    // 문자열에서 첫번째 단어의 슬라이스를 반환하는 함수 예제 코드
     let mut s3 = String::from("hello world");
     let first_word = first_word_slices(&s3);
     println!("first word is {}", first_word);
+
+    // 두번째 단어의 슬라이스를 반환하는 함수 예제 코드
+    let second_word = second_word_slices(&s3);
+    println!("second word is {}", second_word);
 
     s3.clear();
 }
@@ -322,6 +326,19 @@ fn first_word_slices(s: &String) -> &str {
     for (i, &item) in bytes.iter().enumerate() {
         if item == b' ' {
             return &s[0..i];
+        }
+    }
+
+    &s[..]
+}
+
+fn second_word_slices(s: &String) -> &str {
+
+    let bytes = s.as_bytes();
+
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[i+1..s.len()];
         }
     }
 
