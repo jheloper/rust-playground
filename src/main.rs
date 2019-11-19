@@ -301,6 +301,9 @@ fn example_slices() {
 
     // 두번째 단어의 슬라이스를 반환하는 함수 예제 코드
     let second_word = second_word_slices(&s3);
+    // 아래 clear 함수 호출 코드는 컴파일 오류가 발생한다.
+    // 슬라이스로 불변 참조자를 만든 상태이고, clear 함수 내부에서 가변 참조자를 얻기 위한 시도를 하기 때문.
+    // s3.clear();
     println!("second word is {}", second_word);
 
     s3.clear();
