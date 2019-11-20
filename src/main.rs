@@ -307,6 +307,14 @@ fn example_slices() {
     println!("second word is {}", second_word);
 
     s3.clear();
+
+    // 스트링 리터럴은 바이너리의 특정 지점을 가리키고 있는 슬라이스, 아래 string_literal의 타입은 &str.
+    let string_literal = "hello world";
+    let first_word_by_literal = first_word_slices(string_literal);
+    println!("first word is {}", first_word_by_literal);
+
+    let second_word_by_literal = second_word_slices(string_literal);
+    println!("second word is {}", second_word_by_literal);
 }
 
 fn first_word(s: &String) -> usize {
@@ -322,7 +330,7 @@ fn first_word(s: &String) -> usize {
     s.len()
 }
 
-fn first_word_slices(s: &String) -> &str {
+fn first_word_slices(s: &str) -> &str {
 
     let bytes = s.as_bytes();
 
@@ -335,7 +343,7 @@ fn first_word_slices(s: &String) -> &str {
     &s[..]
 }
 
-fn second_word_slices(s: &String) -> &str {
+fn second_word_slices(s: &str) -> &str {
 
     let bytes = s.as_bytes();
 
