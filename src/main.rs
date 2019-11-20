@@ -315,6 +315,11 @@ fn example_slices() {
 
     let second_word_by_literal = second_word_slices(string_literal);
     println!("second word is {}", second_word_by_literal);
+
+    // 일반적인 배열에 대한 슬라이스 예제 코드.
+    let a = [1, 2, 3, 4, 5];
+    let slice = &a[1..3];
+    println!("array slice is {:?}", slice);
 }
 
 fn first_word(s: &String) -> usize {
