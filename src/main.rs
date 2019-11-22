@@ -1,4 +1,7 @@
 mod mod_example;
+mod ownership_example;
+mod reference_example;
+mod slice_example;
 
 fn main() {
     // mutable variable
@@ -123,11 +126,11 @@ fn main() {
     example_string.push_str(", world!");
     println!("example String value is: {}", example_string);
 
-    example_ownership();
+    ownership_example::example_ownership();
 
-    example_reference();
+    reference_example::example_reference();
 
-    example_slices();
+    slice_example::example_slices();
 
     mod_example::example_module();
 }
@@ -152,215 +155,4 @@ fn block_expression() {
 
 fn return_ten() -> i32 {
     10
-}
-
-fn example_ownership() {
-    // 소유권 예제 코드.
-
-    // 아래의 경우 리터럴의 깊은 복사본이 만들어지기 때문에 정상적으로 출력 가능.
-    let x = 5;
-    let y = x;
-    println!("This value of x is: {}, y is: {}", x, y);
-
-    // 아래의 경우 이동(move)이 발생하기 때문에 s1은 더 이상 유효하지 않음.
-    let s1 = String::from("hello");
-    let s2 = s1;
-    //println!("This value of s1 is: {}", s1);
-    println!("This value of s2 is: {}", s2);
-
-    // 아래의 경우 clone 메서드를 이용해서 명시적으로 깊은 복사본을 만들 수 있음.
-    let s3 = String::from("hello");
-    let s4 = s3.clone();
-    println!("This value of s3 is: {}, s4 is: {}", s3, s4);
-
-    // 아래의 경우 복사가 발생하기 때문에 함수 인자로 넘긴 후에도 사용 가능.
-    let z = 5;
-    makes_copy(z);
-    println!("This value of z is: {}", z);
-    // 아래의 경우 이동이 발생하기 때문에 함수 인자로 넘긴 후에는 사용 불가능.
-    let s5 = String::from("hello");
-    takes_ownership(s5);
-    // println!("This value of s5 is: {}", s5);
-
-    // 아래의 경우 s6에 소유권이 이동됐으므로 사용 가능.
-    let s6 = gives_ownership();
-    println!("This value of s6 is: {}", s6);
-
-    // 아래의 경우 s7에서 s8으로 소유권이 이동됐으므로 s7은 무효.
-    let s7 = String::from("hello");
-    let s8 = takes_and_gives_back(s7);
-    // println!("This value of s7 is: {}", s7);
-    println!("This value of s8 is: {}", s8);
-}
-
-fn takes_ownership(some_string: String) {
-    println!("{}", some_string);
-}
-
-fn makes_copy(some_integer: i32) {
-    println!("{}", some_integer);
-}
-
-fn gives_ownership() -> String {
-    let some_string = String::from("hello");
-    some_string
-}
-
-fn takes_and_gives_back(a_string: String) -> String {
-    a_string
-}
-
-fn example_reference() {
-    // 참조자 예제 코드.
-
-    let s1 = String::from("hello");
-    // &s1를 넘겼으므로 소유권이 이동하지 않고 값을 참조할 수 있음.
-    let len = calculate_length(&s1);
-    println!("The length of '{}' is {}.", s1, len);
-
-    let s2 = String::from("hello");
-    change(&s2);
-    println!("The s2 value is '{}'", s2);
-
-    // 아래는 가변 참조자.
-    let mut s3 = String::from("hello");
-    change_mutable(&mut s3);
-    println!("The s3 value is '{}'", s3);
-
-    // 가변 참조자의 빌림은 특정 스코프 내에서 하나만 허용된다.
-    let mut s4 = String::from("hello");
-    let r1 = &mut s4;
-    // let r2 = &mut s4;
-    println!("The r1 value is '{}'", r1);
-    // println!("The r2 value is '{}'", r2);
-
-    // 아래와 같이 가변 참조자를 다른 스코프 내에서 빌리는 것은 가능하다.
-    let mut s5 = String::from("hello");
-    {
-        let r3 = &mut s5;
-        println!("The r3 value is '{}'", r3);
-    }
-    let r4 = &mut s5;
-    println!("The r4 value is '{}'", r4);
-
-    // 아래와 같이 불변 참조자를 가지고 있는 경우 새로운 가변 참조자를 가질 수 없다.
-    let mut s6 = String::from("hello");
-    let r5 = &s6;
-    let r6 = &s6;
-    // let r7 = &mut s6;
-    println!("The r5 value is '{}'", r5);
-    println!("The r6 value is '{}'", r6);
-    // println!("The r7 value is '{}'", r7);
-
-    // 댕글링 참조자 예제.
-    // let reference_to_nothing = dangle();
-    let reference_to_nothing = no_dangle();
-}
-
-fn calculate_length(s: &String) -> usize {
-    // 인자로 &String을 선언하며 스트링 참조자를 받으므로 s는 소유권을 가지지 않음. 이것을 '빌림'이라고 표현.
-    s.len()
-}
-
-fn change(some_string: &String) {
-    // 아래처럼 참조자의 값을 변경할 수 없다.
-    // some_string.push_str(", world!");
-}
-
-fn change_mutable(some_string: &mut String) {
-    some_string.push_str(", world!");
-}
-
-// 아래 함수는 댕글링 참조자를 만들기 때문에 컴파일 오류가 발생한다.
-// fn dangle() -> &String {
-//     let s = String::from("hello");
-//     &s
-// }
-
-fn no_dangle() -> String {
-    let s = String::from("hello");
-    s
-}
-
-fn example_slices() {
-    let mut s1 = String::from("hello world");
-    let word_index = first_word(&s1);
-    println!("word index is {}", word_index);
-
-    s1.clear();
-
-    // 슬라이스를 사용한 예제 코드
-    let mut s2 = String::from("hello world");
-    let hello = &s2[0..5];
-    let world = &s2[6..11];
-    println!("first word is {}", hello);
-    println!("second word is {}", world);
-
-    s2.clear();
-
-    // 문자열에서 첫번째 단어의 슬라이스를 반환하는 함수 예제 코드
-    let mut s3 = String::from("hello world");
-    let first_word = first_word_slices(&s3);
-    println!("first word is {}", first_word);
-
-    // 두번째 단어의 슬라이스를 반환하는 함수 예제 코드
-    let second_word = second_word_slices(&s3);
-    // 아래 clear 함수 호출 코드는 컴파일 오류가 발생한다.
-    // 슬라이스로 불변 참조자를 만든 상태이고, clear 함수 내부에서 가변 참조자를 얻기 위한 시도를 하기 때문.
-    // s3.clear();
-    println!("second word is {}", second_word);
-
-    s3.clear();
-
-    // 스트링 리터럴은 바이너리의 특정 지점을 가리키고 있는 슬라이스, 아래 string_literal의 타입은 &str.
-    let string_literal = "hello world";
-    let first_word_by_literal = first_word_slices(string_literal);
-    println!("first word is {}", first_word_by_literal);
-
-    let second_word_by_literal = second_word_slices(string_literal);
-    println!("second word is {}", second_word_by_literal);
-
-    // 일반적인 배열에 대한 슬라이스 예제 코드.
-    let a = [1, 2, 3, 4, 5];
-    let slice = &a[1..3];
-    println!("array slice is {:?}", slice);
-}
-
-fn first_word(s: &String) -> usize {
-
-    let bytes = s.as_bytes();
-
-    for (i, &item) in bytes.iter().enumerate() {
-        if item == b' ' {
-            return i;
-        }
-    }
-
-    s.len()
-}
-
-fn first_word_slices(s: &str) -> &str {
-
-    let bytes = s.as_bytes();
-
-    for (i, &item) in bytes.iter().enumerate() {
-        if item == b' ' {
-            return &s[0..i];
-        }
-    }
-
-    &s[..]
-}
-
-fn second_word_slices(s: &str) -> &str {
-
-    let bytes = s.as_bytes();
-
-    for (i, &item) in bytes.iter().enumerate() {
-        if item == b' ' {
-            return &s[i+1..s.len()];
-        }
-    }
-
-    &s[..]
 }
