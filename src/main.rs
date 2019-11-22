@@ -1,3 +1,5 @@
+mod mod_example;
+
 fn main() {
     // mutable variable
     let mut x = 5;
@@ -126,6 +128,8 @@ fn main() {
     example_reference();
 
     example_slices();
+
+    mod_example::example_module();
 }
 
 fn another_function(x: i32, y: i32) {
