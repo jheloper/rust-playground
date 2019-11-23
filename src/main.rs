@@ -2,6 +2,7 @@ mod mod_example;
 mod ownership_example;
 mod reference_example;
 mod slice_example;
+mod struct_example;
 
 fn main() {
     // mutable variable
@@ -133,6 +134,8 @@ fn main() {
     slice_example::example_slices();
 
     mod_example::example_module();
+
+    struct_example::example_struct();
 }
 
 fn another_function(x: i32, y: i32) {
