@@ -7,6 +7,7 @@ mod ownership_example;
 mod reference_example;
 mod slice_example;
 mod struct_example;
+mod struct_rectangles_example;
 
 fn main() {
     // 변수와 가변성 예제
@@ -35,4 +36,7 @@ fn main() {
 
     // 구조체 예제
     struct_example::example_struct();
+
+    // 구조체 이용 예제
+    struct_rectangles_example::example_struct_rectangles();
 }
