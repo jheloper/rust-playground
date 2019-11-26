@@ -1,6 +1,13 @@
 pub fn example_ownership() {
     // 소유권 예제 코드.
 
+    // Rust의 문자열 리터럴 값은 불변.
+    // 또한 컴파일 시점에서 값이 정해지지 않는 경우도 존재함.
+    // 따라서 문자열 리터럴이 아닌 문자열 타입인 String을 제공함.
+    let mut example_string = String::from("hello");
+    example_string.push_str(", world!");
+    println!("example String value is: {}", example_string);
+
     // 아래의 경우 리터럴의 깊은 복사본이 만들어지기 때문에 정상적으로 출력 가능.
     let x = 5;
     let y = x;
