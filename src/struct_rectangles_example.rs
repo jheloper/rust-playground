@@ -20,6 +20,10 @@ pub fn example_struct_rectangles() {
         "The area of the rectangle is {} square pixels.",
         calculate_area_by_struct(&rect2)
     );
+
+    // Rectangle 구조체 인스턴스 출력.
+    println!("rectangle is {:?}", rect2);
+    println!("rectangle is {:#?}", rect2);
 }
 
 fn calculate_area(length: u32, width: u32) -> u32 {
@@ -31,6 +35,8 @@ fn calculate_area_by_tuple(dimensions: (u32, u32)) -> u32 {
     dimensions.0 * dimensions.1
 }
 
+// derive 어노테이션 적용.
+#[derive(Debug)]
 struct Rectangle {
     length: u32,
     width: u32,
