@@ -9,6 +9,7 @@ mod slice_example;
 mod struct_example;
 mod struct_rectangles_example;
 mod method_example;
+mod enums_example;
 
 fn main() {
     // 변수와 가변성 예제
@@ -42,5 +43,8 @@ fn main() {
     // struct_rectangles_example::example_struct_rectangles();
 
     // 메서드 문법 예제
-    method_example::example_method();
+    // method_example::example_method();
+
+    // 열거형 예제
+    enums_example::example_enums();
 }
