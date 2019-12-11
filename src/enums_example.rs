@@ -17,7 +17,7 @@ pub fn example_enums() {
     println!("home ip address is {:?}", home1);
     println!("loopback ip address is {:?}", loopback1);
 
-    let home2 = IpAddrEnum::V4(String::from("127.0.0.1"));
+    let home2 = IpAddrEnum::V4(127, 0, 0, 1);
     let loopback2 = IpAddrEnum::V6(String::from("::1"));
 
     println!("home ip address is {:?}", home2);
@@ -38,6 +38,6 @@ struct IpAddr {
 
 #[derive(Debug)]
 enum IpAddrEnum {
-    V4(String),
+    V4(u8, u8, u8, u8),
     V6(String),
 }
