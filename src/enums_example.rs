@@ -5,16 +5,23 @@ pub fn example_enums() {
     println!("IPv4 Addr Kind is {:?}", four);
     println!("IPv6 Addr Kind is {:?}", six);
 
-    let home = IpAddr {
+    let home1 = IpAddr {
         kind: IpAddrKind::V4,
         address: String::from("127.0.0.1")
     };
-    let loopback = IpAddr {
+    let loopback1 = IpAddr {
         kind: IpAddrKind::V6,
         address: String::from("::1")
     };
-    println!("home ip address is {:?}", home);
-    println!("loopback ip address is {:?}", loopback);
+
+    println!("home ip address is {:?}", home1);
+    println!("loopback ip address is {:?}", loopback1);
+
+    let home2 = IpAddrEnum::V4(String::from("127.0.0.1"));
+    let loopback2 = IpAddrEnum::V6(String::from("::1"));
+
+    println!("home ip address is {:?}", home2);
+    println!("loopback ip address is {:?}", loopback2);
 }
 
 #[derive(Debug)]
@@ -27,4 +34,10 @@ enum IpAddrKind {
 struct IpAddr {
     kind: IpAddrKind,
     address: String,
+}
+
+#[derive(Debug)]
+enum IpAddrEnum {
+    V4(String),
+    V6(String),
 }
