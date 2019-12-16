@@ -22,6 +22,16 @@ pub fn example_enums() {
 
     println!("home ip address is {:?}", home2);
     println!("loopback ip address is {:?}", loopback2);
+
+    let message1 = Message::Quit;
+    let message2 = Message::Move {x: 7, y: 12};
+    let message3 = Message::Write(String::from("hello"));
+    let message4 = Message::ChangeColor(15, 10, 30);
+
+    message1.call();
+    message2.call();
+    message3.call();
+    message4.call();
 }
 
 #[derive(Debug)]
@@ -40,4 +50,18 @@ struct IpAddr {
 enum IpAddrEnum {
     V4(u8, u8, u8, u8),
     V6(String),
+}
+
+#[derive(Debug)]
+enum Message {
+    Quit,
+    Move { x: i32, y: i32 },
+    Write(String),
+    ChangeColor(i32, i32, i32),
+}
+
+impl Message {
+    fn call(&self) {
+        println!("call method in enum: {:?}", self);
+    }
 }
