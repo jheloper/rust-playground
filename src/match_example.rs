@@ -3,7 +3,7 @@ pub fn example_match() {
     let penny = Coin::Penny;
     let nickel = Coin::Nickel;
     let dime = Coin::Dime;
-    let quarter = Coin::Quarter;
+    let quarter = Coin::Quarter(UsState::Washington);
 
     println!("penny coin value is {}", value_in_cents(penny));
     println!("nickel coin value is {}", value_in_cents(nickel));
@@ -11,11 +11,19 @@ pub fn example_match() {
     println!("quarter coin value is {}", value_in_cents(quarter));
 }
 
+#[derive(Debug)] // So we can inspect the state in a minute
+enum UsState {
+    Alabama,
+    Alaska,
+    Washington,
+    Ohio,
+}
+
 enum Coin {
     Penny,
     Nickel,
     Dime,
-    Quarter,
+    Quarter(UsState),
 }
 
 fn value_in_cents(coin: Coin) -> u32 {
@@ -26,6 +34,9 @@ fn value_in_cents(coin: Coin) -> u32 {
         },
         Coin::Nickel => 5,
         Coin::Dime => 10,
-        Coin::Quarter => 25,
+        Coin::Quarter(state) => {
+            println!("State quarter from {:?}!", state);
+            25
+        },
     }
 }
