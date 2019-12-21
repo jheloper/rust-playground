@@ -1,5 +1,4 @@
 pub fn example_match() {
-    
     let penny = Coin::Penny;
     let nickel = Coin::Nickel;
     let dime = Coin::Dime;
@@ -9,6 +8,14 @@ pub fn example_match() {
     println!("nickel coin value is {}", value_in_cents(nickel));
     println!("dime coin value is {}", value_in_cents(dime));
     println!("quarter coin value is {}", value_in_cents(quarter));
+
+    let number_five = Some(5);
+    let number_six = plus_one(number_five);
+    let none = plus_one(None);
+
+    println!("number five is {:?}", number_five);
+    println!("number six is {:?}", number_six);
+    println!("none is {:?}", none);
 }
 
 #[derive(Debug)] // So we can inspect the state in a minute
@@ -31,12 +38,19 @@ fn value_in_cents(coin: Coin) -> u32 {
         Coin::Penny => {
             println!("Lucky penny!");
             1
-        },
+        }
         Coin::Nickel => 5,
         Coin::Dime => 10,
         Coin::Quarter(state) => {
             println!("State quarter from {:?}!", state);
             25
-        },
+        }
+    }
+}
+
+fn plus_one(x: Option<i32>) -> Option<i32> {
+    match x {
+        None => None,
+        Some(i) => Some(i + 1),
     }
 }
