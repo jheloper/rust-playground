@@ -16,6 +16,15 @@ pub fn example_match() {
     println!("number five is {:?}", number_five);
     println!("number six is {:?}", number_six);
     println!("none is {:?}", none);
+
+    let number = 7;
+    match number {
+        1 => println!("one"),
+        3 => println!("three"),
+        5 => println!("five"),
+        7 => println!("seven"),
+        _ => (),
+    }
 }
 
 #[derive(Debug)] // So we can inspect the state in a minute
