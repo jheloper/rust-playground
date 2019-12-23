@@ -25,6 +25,24 @@ pub fn example_match() {
         7 => println!("seven"),
         _ => (),
     }
+
+    // if let 문법 예제
+    let some_8_value = Some(8);
+    if let Some(3) = some_8_value {
+        println!("three!");
+    }
+    if let Some(8) = some_8_value {
+        println!("eight!");
+    }
+
+    // if let else 문법 예제
+    let mut count = 5;
+    if let 10 = count {
+        println!("ten!");
+    } else {
+        count += 1;
+    }
+    println!("count is {}!", count);
 }
 
 #[derive(Debug)] // So we can inspect the state in a minute
