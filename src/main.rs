@@ -11,6 +11,7 @@ mod struct_rectangles_example;
 mod method_example;
 mod enums_example;
 mod match_example;
+mod collection_example;
 
 fn main() {
     // 변수와 가변성 예제
@@ -50,5 +51,8 @@ fn main() {
     // enums_example::example_enums();
 
     // match 예제
-    match_example::example_match();
+    // match_example::example_match();
+
+    // 컬렉션 예제
+    collection_example::example_collection();
 }
