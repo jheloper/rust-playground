@@ -1,5 +1,4 @@
 pub fn example_collection() {
-
     let vector1: Vec<i32> = Vec::new();
     // vec! 매크로를 사용하여 초기값을 가진 벡터 생성
     let vector2 = vec![1, 2, 3, 4, 5];
@@ -28,11 +27,26 @@ pub fn example_collection() {
     // println!("vector hundred element is {}", does_not_exist1);
     println!("vector hundred element is {:?}", does_not_exist2);
 
-    // 벡터의 push 메서드를 통해 요소를 추가할 때 벡터 전체의 복사가 발생하는데, 
+    // 벡터의 push 메서드를 통해 요소를 추가할 때 벡터 전체의 복사가 발생하는데,
     // 빌림 규칙에 따라 다른 참조자가 존재하면 컴파일 타임 에러 발생.
     let mut vector4 = vec![1, 2, 3, 4, 5];
     let first = &vector4[0];
     // vector4.push(6);
 
     println!("vector first element is: {}", first);
+
+    // 열거형을 정의하여 벡터 내에 여러 타입의 데이터를 담을 수 있음.
+    let row = vec![
+        SpreadsheetCell::Int(3),
+        SpreadsheetCell::Text(String::from("blue")),
+        SpreadsheetCell::Float(10.12),
+    ];
+    println!("enums in a vector: {:?}", row);
+}
+
+#[derive(Debug)]
+enum SpreadsheetCell {
+    Int(i32),
+    Float(f64),
+    Text(String),
 }
