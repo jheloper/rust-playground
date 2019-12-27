@@ -32,8 +32,19 @@ pub fn example_collection() {
     let mut vector4 = vec![1, 2, 3, 4, 5];
     let first = &vector4[0];
     // vector4.push(6);
-
     println!("vector first element is: {}", first);
+
+    // 
+    let vector5 = vec![100, 32, 57];
+    for i in &vector5 {
+        println!("{}", i);
+    }
+
+    let mut vector6 = vec![100, 32, 57];
+    for i in &mut vector6 {
+        *i += 50;
+        println!("{}", i);
+    }
 
     // 열거형을 정의하여 벡터 내에 여러 타입의 데이터를 담을 수 있음.
     let row = vec![
