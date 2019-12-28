@@ -34,7 +34,7 @@ pub fn example_collection() {
     // vector4.push(6);
     println!("vector first element is: {}", first);
 
-    // 
+    // 벡터 요소 반복처리 예제
     let vector5 = vec![100, 32, 57];
     for i in &vector5 {
         println!("{}", i);
@@ -53,6 +53,26 @@ pub fn example_collection() {
         SpreadsheetCell::Float(10.12),
     ];
     println!("enums in a vector: {:?}", row);
+
+    let mut string1 = String::new();
+
+    let data = "initial contents";
+    let string2 = data.to_string();
+    let string3 = "initial contents".to_string();
+    println!("string2 is {}", string2);
+    println!("string3 is {}", string3);
+
+    let mut string4 = String::from("foo");
+    println!("string4 is {}", string4);
+    string4.push_str("bar");
+    println!("string4 is {}", string4);
+    let string5 = "baz";
+    string4.push_str(string5);
+    println!("string4 is {}", string4);
+
+    let mut string6 = String::from("lo");
+    string6.push('l');
+    println!("string6 is {}", string6);
 }
 
 #[derive(Debug)]
