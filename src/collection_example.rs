@@ -73,6 +73,17 @@ pub fn example_collection() {
     let mut string6 = String::from("lo");
     string6.push('l');
     println!("string6 is {}", string6);
+
+    let string7 = String::from("Hello, ");
+    let string8 = String::from("World!");
+    let string9 = string7 + &string8;
+    println!("string9 is {}", string9);
+
+    let tic = String::from("tic");
+    let tac = String::from("tac");
+    let toe = String::from("toe");
+    let tictactoe = format!("{}-{}-{}", tic, tac, toe);
+    println!("{}", tictactoe);
 }
 
 #[derive(Debug)]
