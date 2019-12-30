@@ -111,11 +111,11 @@ pub fn example_collection() {
         println!("{}", b);
     }
 
-    let mut scores = HashMap::new();
+    let mut scores1 = HashMap::new();
 
-    scores.insert(String::from("Blue"), 10);
-    scores.insert(String::from("Yellow"), 50);
-    println!("scores is {:?}", scores);
+    scores1.insert(String::from("Blue"), 10);
+    scores1.insert(String::from("Yellow"), 50);
+    println!("scores1 is {:?}", scores1);
 
     let teams = vec![String::from("Blue"), String::from("Yellow")];
     let initial_scores = vec![10, 50];
@@ -135,13 +135,33 @@ pub fn example_collection() {
 
     // 해쉬맵 내의 값에 접근
     let team_name = String::from("Blue");
-    let team_score = scores.get(&team_name);
+    let team_score = scores1.get(&team_name);
     println!("team score is {:?}", team_score);
 
     // 해쉬맵 내의 각각의 쌍을 순회
-    for (key, value) in &scores {
+    for (key, value) in &scores1 {
         println!("{}: {}", key, value);
     }
+
+    // insert 메서드로 기존 값을 갱신할 수 있음
+    let mut scores3 = HashMap::new();
+    scores3.insert(String::from("Blue"), 10);
+    scores3.insert(String::from("Blue"), 25);
+    println!("scores3 is {:?}", scores3);
+
+    // or_insert 메서드로 해당 키에 할당된 값이 존재하지 않을 경우에만 값을 삽입
+    scores3.entry(String::from("Blue")).or_insert(10);
+    scores3.entry(String::from("Yellow")).or_insert(50);
+    println!("scores3 is {:?}", scores3);
+
+    // 기존 값을 기초로 값을 갱신할 수 있음
+    let text = "hello world wonderful world";
+    let mut word_map = HashMap::new();
+    for word in text.split_whitespace() {
+        let count = word_map.entry(word).or_insert(0);
+        *count += 1;
+    }
+    println!("{:?}", word_map);
 }
 
 #[derive(Debug)]
