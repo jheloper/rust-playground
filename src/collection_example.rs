@@ -84,6 +84,30 @@ pub fn example_collection() {
     let toe = String::from("toe");
     let tictactoe = format!("{}-{}-{}", tic, tac, toe);
     println!("{}", tictactoe);
+
+    let string10 = String::from("hello");
+    // 스트링의 인덱스를 통한 문자 접근은 불가함.
+    // let h = string10[0];
+    println!("string10 length is {}", string10.len());
+
+    // 아래 문자열은 UTF-8로 인코딩되어 있어 각 글자들이 2바이트를 차지함. 따라서 len은 24를 반환.
+    let string11 = String::from("Здравствуйте");
+    println!("string11 length is {}", string11.len());
+
+    // 아래 코드는 인덱스 접근 오류 발생. 왜냐하면 하나의 글자가 2바이트를 차지하는데, 첫번째 바이트에만 접근하기 때문.
+    // println!("string11 index 0 to 1 is {}", &string11[0..1]);
+    // 아래 코드는 정상 실행.
+    println!("string11 index 0 to 4 is {}", &string11[0..4]);
+
+    // 아래 코드는 유니코드 스칼라 값 하나씩 순회
+    for c in "Здравствуйте".chars() {
+        println!("{}", c);
+    }
+
+    // 아래 코드는 바이트 값 하나씩 순회
+    for b in "Здравствуйте".bytes() {
+        println!("{}", b);
+    }
 }
 
 #[derive(Debug)]
