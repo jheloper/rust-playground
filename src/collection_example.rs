@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 pub fn example_collection() {
     let vector1: Vec<i32> = Vec::new();
     // vec! 매크로를 사용하여 초기값을 가진 벡터 생성
@@ -107,6 +109,38 @@ pub fn example_collection() {
     // 아래 코드는 바이트 값 하나씩 순회
     for b in "Здравствуйте".bytes() {
         println!("{}", b);
+    }
+
+    let mut scores = HashMap::new();
+
+    scores.insert(String::from("Blue"), 10);
+    scores.insert(String::from("Yellow"), 50);
+    println!("scores is {:?}", scores);
+
+    let teams = vec![String::from("Blue"), String::from("Yellow")];
+    let initial_scores = vec![10, 50];
+
+    let scores2: HashMap<_, _> = teams.iter().zip(initial_scores.iter()).collect();
+    println!("scores2 is {:?}", scores2);
+
+    let field_name = String::from("Favorite color");
+    let field_value = String::from("Blue");
+    let mut map = HashMap::new();
+    map.insert(field_name, field_value);
+    println!("map is {:?}", map);
+
+    // 아래 코드는 에러 발생. 해쉬맵의 키와 값으로 삽입되는 순간 소유권이 이동되기 때문
+    // print!("field name is {}", field_name);
+    // print!("field value is {}", field_value);
+
+    // 해쉬맵 내의 값에 접근
+    let team_name = String::from("Blue");
+    let team_score = scores.get(&team_name);
+    println!("team score is {:?}", team_score);
+
+    // 해쉬맵 내의 각각의 쌍을 순회
+    for (key, value) in &scores {
+        println!("{}: {}", key, value);
     }
 }
 
