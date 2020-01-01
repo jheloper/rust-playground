@@ -12,6 +12,7 @@ mod method_example;
 mod enums_example;
 mod match_example;
 mod collection_example;
+mod error_example;
 
 fn main() {
     // 변수와 가변성 예제
@@ -54,5 +55,8 @@ fn main() {
     // match_example::example_match();
 
     // 컬렉션 예제
-    collection_example::example_collection();
+    // collection_example::example_collection();
+
+    // 에러 예제
+    error_example::example_error();
 }
