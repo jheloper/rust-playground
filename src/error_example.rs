@@ -1,5 +1,7 @@
 use std::fs::File;
+use std::io;
 use std::io::ErrorKind;
+use std::io::Read;
 
 pub fn example_error() {
     // panic! 매크로 사용
@@ -20,9 +22,27 @@ pub fn example_error() {
         Err(error) => panic!("There was a problem opening the file: {:?}", error),
     };
 
-    // unwrap 메서드를 사용
+    // unwrap 메서드를 사용하여 위의 match 구문과 비슷한 처리를 할 수 있음
     // let f2 = File::open("hello2.txt").unwrap();
 
     // expect 메서드를 사용하여 panic! 에러 메시지를 선택할 수 있음
     let f2 = File::open("hello2.txt").expect("Failed to open file");
+
+    read_username_from_file();
+}
+
+fn read_username_from_file() -> Result<String, io::Error> {
+    let f = File::open("hello.txt");
+
+    let mut f = match f {
+        Ok(file) => file,
+        Err(e) => return Err(e),
+    };
+
+    let mut s = String::new();
+    
+    match f.read_to_string(&mut s) {
+        Ok(_) => Ok(s),
+        Err(e) => Err(e),
+    }
 }
