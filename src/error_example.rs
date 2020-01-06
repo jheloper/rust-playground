@@ -26,9 +26,13 @@ pub fn example_error() {
     // let f2 = File::open("hello2.txt").unwrap();
 
     // expect 메서드를 사용하여 panic! 에러 메시지를 선택할 수 있음
-    let f2 = File::open("hello2.txt").expect("Failed to open file");
+    // let f2 = File::open("hello2.txt").expect("Failed to open file");
 
-    read_username_from_file();
+    let result = read_username_from_file();
+    println!("result: {:?}", result);
+
+    let result2 = read_username_from_file2();
+    println!("result2: {:?}", result2);
 }
 
 fn read_username_from_file() -> Result<String, io::Error> {
@@ -45,4 +49,12 @@ fn read_username_from_file() -> Result<String, io::Error> {
         Ok(_) => Ok(s),
         Err(e) => Err(e),
     }
+}
+
+fn read_username_from_file2() -> Result<String, io::Error> {
+    // ?연산자를 통해 에러를 전파하는 위의 match 표현식을 대체할 수 있음
+    let mut f = File::open("hello.txt")?;
+    let mut s = String::new();
+    f.read_to_string(&mut s)?;
+    Ok(s)
 }
