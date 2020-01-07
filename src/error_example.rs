@@ -33,6 +33,9 @@ pub fn example_error() {
 
     let result2 = read_username_from_file2();
     println!("result2: {:?}", result2);
+
+    // ?연산자는 Result를 반환하는 함수 내에서만 사용 가능하므로 아래 코드는 에러 발생
+    // let f3 = File::open("hello.txt")?;
 }
 
 fn read_username_from_file() -> Result<String, io::Error> {
@@ -57,4 +60,9 @@ fn read_username_from_file2() -> Result<String, io::Error> {
     let mut s = String::new();
     f.read_to_string(&mut s)?;
     Ok(s)
+
+    // 아래와 같이 메서드 체이닝을 이용해 코드를 더 줄일 수 있음
+    // let mut s = String::new();
+    // File::open("hello.txt")?.read_to_string(&mut s)?;
+    // Ok(s)
 }
