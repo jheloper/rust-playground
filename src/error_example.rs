@@ -36,6 +36,13 @@ pub fn example_error() {
 
     // ?연산자는 Result를 반환하는 함수 내에서만 사용 가능하므로 아래 코드는 에러 발생
     // let f3 = File::open("hello.txt")?;
+
+    // 값의 유효성을 검증하여 유효하지 않은 경우 panic! 발생
+    let guess1 = Guess::new(101);
+    // println!("guess1 is {}", guess1.value());
+    
+    let guess2 = Guess::new(90);
+    println!("guess2 is {}", guess2.value());
 }
 
 fn read_username_from_file() -> Result<String, io::Error> {
@@ -47,7 +54,6 @@ fn read_username_from_file() -> Result<String, io::Error> {
     };
 
     let mut s = String::new();
-    
     match f.read_to_string(&mut s) {
         Ok(_) => Ok(s),
         Err(e) => Err(e),
@@ -65,4 +71,22 @@ fn read_username_from_file2() -> Result<String, io::Error> {
     // let mut s = String::new();
     // File::open("hello.txt")?.read_to_string(&mut s)?;
     // Ok(s)
+}
+
+pub struct Guess {
+    value: u32,
+}
+
+impl Guess {
+    pub fn new(value: u32) -> Guess {
+        if value < 1 || value > 100 {
+            panic!("Guess value must be between 1 and 100, got {}.", value);
+        }
+
+        Guess { value }
+    }
+
+    pub fn value(&self) -> u32 {
+        self.value
+    }
 }
