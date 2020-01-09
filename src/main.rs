@@ -13,6 +13,7 @@ mod enums_example;
 mod match_example;
 mod collection_example;
 mod error_example;
+mod generic_example;
 
 fn main() {
     // 변수와 가변성 예제
@@ -58,5 +59,8 @@ fn main() {
     // collection_example::example_collection();
 
     // 에러 예제
-    error_example::example_error();
+    // error_example::example_error();
+
+    // 제네릭 예제
+    generic_example::example_generic();
 }
