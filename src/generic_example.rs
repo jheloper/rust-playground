@@ -15,6 +15,15 @@ pub fn example_generic() {
     let chars = vec!['y', 'm', 'a', 'q'];
     let result4 = largest_char(&chars);
     println!("The largest char is {}", result4);
+
+    let integer = Point { x: 5, y: 10 };
+    let float = Point { x: 1.0, y: 4.0 };
+    println!("integer point is {:?}", integer);
+    println!("float point is {:?}", float);
+
+    // 아래 구조체는 하나의 제네릭 타입을 사용하기 때문에 동일한 타입이어야 함
+    // 따라서 아래 구조체는 오류 발생
+    // let wont_work = Point { x: 5, y: 4.0 };
 }
 
 fn largest(list: &[i32]) -> i32 {
@@ -51,4 +60,10 @@ fn largest_char(list: &[char]) -> char {
     }
 
     largest
+}
+
+#[derive(Debug)]
+struct Point<T> {
+    x: T,
+    y: T,
 }
