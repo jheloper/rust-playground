@@ -17,13 +17,23 @@ pub fn example_generic() {
     println!("The largest char is {}", result4);
 
     let integer = Point { x: 5, y: 10 };
-    let float = Point { x: 1.0, y: 4.0 };
+    let float = Point { x: 1.5, y: 4.0 };
     println!("integer point is {:?}", integer);
     println!("float point is {:?}", float);
 
     // 아래 구조체는 하나의 제네릭 타입을 사용하기 때문에 동일한 타입이어야 함
     // 따라서 아래 구조체는 오류 발생
     // let wont_work = Point { x: 5, y: 4.0 };
+
+    let both_integer = Point2 { x: 5, y: 10 };
+    let both_float = Point2 { x: 1.0, y: 4.0 };
+    let integer_and_float = Point2 { x: 5, y: 4.0 };
+    println!("both integer point is {:?}", both_integer);
+    println!("both float point is {:?}", both_float);
+    println!("integer and float point is {:?}", integer_and_float);
+
+    println!("integer point x is {}", integer.x());
+    println!("float point x is {}", float.x());
 }
 
 fn largest(list: &[i32]) -> i32 {
@@ -66,4 +76,16 @@ fn largest_char(list: &[char]) -> char {
 struct Point<T> {
     x: T,
     y: T,
+}
+
+impl<T> Point<T> {
+    fn x(&self) -> &T {
+        &self.x
+    }
+}
+
+#[derive(Debug)]
+struct Point2<T, U> {
+    x: T,
+    y: U,
 }
