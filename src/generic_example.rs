@@ -34,6 +34,11 @@ pub fn example_generic() {
 
     println!("integer point x is {}", integer.x());
     println!("float point x is {}", float.x());
+
+    let p1 = Point2 { x: 5, y: 10.4 };
+    let p2 = Point2 { x: "Hello", y: 'c'};
+    let p3 = p1.mixup(p2);
+    println!("p3.x = {}, p3.y = {}", p3.x, p3.y);
 }
 
 fn largest(list: &[i32]) -> i32 {
@@ -88,4 +93,13 @@ impl<T> Point<T> {
 struct Point2<T, U> {
     x: T,
     y: U,
+}
+
+impl<T, U> Point2<T, U> {
+    fn mixup<V, W>(self, other: Point2<V, W>) -> Point2<T, W> {
+        Point2 {
+            x: self.x,
+            y: other.y,
+        }
+    }
 }
