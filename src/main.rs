@@ -14,6 +14,7 @@ mod match_example;
 mod collection_example;
 mod error_example;
 mod generic_example;
+mod trait_example;
 
 fn main() {
     // 변수와 가변성 예제
@@ -62,5 +63,8 @@ fn main() {
     // error_example::example_error();
 
     // 제네릭 예제
-    generic_example::example_generic();
+    // generic_example::example_generic();
+
+    // 트레잇 예제
+    trait_example::example_trait();
 }
