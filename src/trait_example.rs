@@ -23,6 +23,10 @@ pub fn example_trait() {
     };
 
     println!("feed summary is {}", feed.summary());
+
+    notify(news_article);
+    notify(tweet);
+    notify(feed);
 }
 
 trait Summarizable {
@@ -68,4 +72,8 @@ impl Summarizable for Feed {
     fn author_summary(&self) -> String {
         format!("by {}", self.username)
     }
+}
+
+fn notify(item: impl Summarizable) {
+    println!("Breaking news! {}", item.summary());
 }
