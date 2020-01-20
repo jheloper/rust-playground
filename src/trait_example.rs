@@ -24,9 +24,13 @@ pub fn example_trait() {
 
     println!("feed summary is {}", feed.summary());
 
-    notify(news_article);
-    notify(tweet);
-    notify(feed);
+    // notify(news_article);
+    // notify(tweet);
+    // notify(feed);
+
+    notify_trait_bound(news_article);
+    notify_trait_bound(tweet);
+    notify_trait_bound(feed);
 }
 
 trait Summarizable {
@@ -76,4 +80,8 @@ impl Summarizable for Feed {
 
 fn notify(item: impl Summarizable) {
     println!("Breaking news! {}", item.summary());
+}
+
+fn notify_trait_bound<T: Summarizable>(item: T) {
+    println!("Breaking news! {}(Trait bound)", item.summary());
 }
