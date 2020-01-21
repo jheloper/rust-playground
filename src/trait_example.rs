@@ -24,13 +24,22 @@ pub fn example_trait() {
 
     println!("feed summary is {}", feed.summary());
 
-    // notify(news_article);
-    // notify(tweet);
-    // notify(feed);
+    notify(&news_article);
+    notify(&tweet);
+    notify(&feed);
 
-    notify_trait_bound(news_article);
-    notify_trait_bound(tweet);
-    notify_trait_bound(feed);
+    notify_trait_bound(&news_article);
+    notify_trait_bound(&tweet);
+    notify_trait_bound(&feed);
+
+    notify2(&news_article, &tweet);
+
+    let feed2 = Feed {
+        username: String::from("James"),
+        content: String::from("this is feed2 content!")
+    };
+
+    notify_trait_bound2(&feed, &feed2);
 }
 
 trait Summarizable {
@@ -78,10 +87,18 @@ impl Summarizable for Feed {
     }
 }
 
-fn notify(item: impl Summarizable) {
+fn notify(item: &impl Summarizable) {
     println!("Breaking news! {}", item.summary());
 }
 
-fn notify_trait_bound<T: Summarizable>(item: T) {
-    println!("Breaking news! {}(Trait bound)", item.summary());
+fn notify_trait_bound<T: Summarizable>(item: &T) {
+    println!("(Trait bound)Breaking news! {}", item.summary());
+}
+
+fn notify2(item1: &impl Summarizable, item2: &impl Summarizable) {
+    println!("Item1 summary is: {}, Item2 summary is: {}", item1.summary(), item2.summary());
+}
+
+fn notify_trait_bound2<T: Summarizable>(item1: &T, item2: &T) {
+    println!("(Trait bound)Item1 summary is: {}, Item2 summary is: {}", item1.summary(), item2.summary());
 }
