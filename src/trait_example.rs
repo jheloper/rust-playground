@@ -40,6 +40,10 @@ pub fn example_trait() {
     };
 
     notify_trait_bound2(&feed, &feed2);
+
+    notify3(&news_article);
+    
+    notify_trait_bound3(&news_article);
 }
 
 trait Summarizable {
@@ -87,6 +91,16 @@ impl Summarizable for Feed {
     }
 }
 
+trait Display {
+    fn display(&self) -> String;
+}
+
+impl Display for NewsArticle {
+    fn display(&self) -> String {
+        format!("content is: {}", self.content)
+    }
+}
+
 fn notify(item: &impl Summarizable) {
     println!("Breaking news! {}", item.summary());
 }
@@ -101,4 +115,12 @@ fn notify2(item1: &impl Summarizable, item2: &impl Summarizable) {
 
 fn notify_trait_bound2<T: Summarizable>(item1: &T, item2: &T) {
     println!("(Trait bound)Item1 summary is: {}, Item2 summary is: {}", item1.summary(), item2.summary());
+}
+
+fn notify3(item: &(impl Summarizable + Display)) {
+    println!("Item is: {}, {}", item.summary(), item.display());
+}
+
+fn notify_trait_bound3<T: Summarizable + Display>(item: &T) {
+    println!("(Trait bound)Item is: {}, {}", item.summary(), item.display());
 }
